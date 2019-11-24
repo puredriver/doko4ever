@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}">
+
+  <body>
+  
+   <section layout:fragment="custom-content">
+
+	      <style type="text/css">
+       
+</style>
+
+
+<span  th:each="p : ${pyramids}">
+
+<h3 th:text="${p.name}" class="text-primary"></h3>
+
+
+ <div align="center">
+  <div align="center" th:each="r : ${p.rows}">
+  	  	
+  	<a th:href="@{/matchchallenge/__${p.rankinglist.id}__/__${e.mId}__}" th:each="e : ${r.entries}" th:text="${e.memberDisp}"></a> 
+  
+  </div>
+  
+</div> 
+
+<h5>Nächste Matches</h5>
+<div align="center" th:each="match : ${p.rankinglist.matches}">
+<p th:text="${match.display}"> </p>
+</div>
+
+            
+
+<br/>
+</span>
+
+    </section>
+  
+  </body>
+  
+</html>

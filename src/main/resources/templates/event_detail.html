@@ -1,0 +1,33 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+
+    <body>
+        <section layout:fragment="custom-content">
+      
+      <div class="container">
+      
+      <div class="row">
+	    <div class="col-5">  
+		<h4>Dokotermin</h4>
+		</div>
+	  </div>	
+	
+	  <div class="row">	
+		<form action="#" th:action="@{/event}" method="post" th:object="${event}">
+		
+			 <div th:include="event_form :: event_form">form</div>
+
+		  <button class="btn btn-primary" type="submit">Speichern</button>
+			      		          
+		</form>
+	  
+	  </div>
+	  	
+      </div> <!-- container -->		
+
+</section>
+ </body>
+
+	
+</html>
+

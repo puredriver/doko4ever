@@ -1,0 +1,39 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+
+    <body>
+        <section layout:fragment="custom-content">
+        
+		<h3 th:text="'Rangliste ' +  ${{rankinglist.name}}"></h3>
+			
+			<a th:href="@{/rankinglist/add/__${rankinglist.id}__}">Position hinzuf&uuml;gen</a>
+			<a th:href="@{/rankinglist/delete/__${rankinglist.id}__}">Letzte Position l&ouml;schen</a></td>
+				
+			  <table class="table table-striped">
+                <thead>
+                    <tr>                                              
+                    	<th scope="col">Pos</th>
+                    	<th scope="col">Spieler</th>                    	                 
+                    	<th scope="col">Actions</th>	                                                                 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="rg : ${rankinglist.rankings}">                    	
+                    	<td th:text="${rg.ranking}"></td>
+                    	<td th:text="${rg.member != null} ? ${rg.member.display} : '--kein Spieler zugewiesen--'"> </td>                    	     
+                    	<td><a th:href="@{/ranking/__${rg.id}__}">&Auml;ndern</a>                    	
+                    </tr>           
+                </tbody>
+            </table>
+						
+			     	      		          			
+		</form>
+		
+		<br/>      
+
+</section>
+ </body>
+
+	
+</html>
+

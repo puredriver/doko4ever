@@ -1,0 +1,58 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout.html}">
+    
+    <body>
+        <section layout:fragment="custom-content">
+  
+  <style type="text/css">
+    td 
+    {
+        text-align:center;
+    }
+</style>
+      
+<h3>Rangliste</h3>
+
+		<form th:action="@{/rankinglist}" method="post" th:object="${rankinglist}" class="form-inline">
+                	
+			<div class="form-group">
+		          <input class="form-control mr-sm-2" th:field="*{name}" type="text" placeholder="Name">		         
+		          <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="label label-danger"></p>
+		    </div> 
+			
+			<button class="btn btn-primary" type="submit">Hinzuf&uuml;gen</button>     	      		          
+		</form>
+
+		<table class="table table-striped">
+                <thead>
+                    <tr>                       
+                    	<th scope="col">Name</th>                                                                  
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="r : ${rankinglists}">
+                    	<td th:text="${{r.name}}"></td>
+                        <td>
+                        	<a th:href="@{/rankinglist/__${r.id}__}">Verwalten</a>                        	
+                        </td>                        
+                    </tr>           
+                </tbody>
+            </table>
+            
+
+
+<!-- <table border="1">
+  
+    <tr th:each="r : ${ranking.rows}">
+    	<td th:text="${r.display}"></td>
+    </tr>
+
+</table> 
+ -->
+ 
+</section>
+ </body>
+
+	
+	</html>
+

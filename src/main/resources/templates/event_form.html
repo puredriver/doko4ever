@@ -1,0 +1,72 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    
+</head>
+<body>
+
+        <div th:fragment="event_form" th:align="center">
+        
+        	<input th:type="hidden" name="id" th:field="*{id}" />
+       
+			<div class="form-group">
+				  <label for="location">Ort</label>
+		          <input class="form-control mr-sm-2" th:field="*{location}" type="text">		         
+		          <p th:if="${#fields.hasErrors('location')}" th:errors="*{location}" class="label label-danger"></p>
+		    </div>           
+		        
+		    <div class="form-group">
+		        <label for="entryDate">Datum</label>
+		    	<div class="input-group date" id="eventDate" data-target-input="nearest">
+                    <input type="text" th:field="*{eventDate}" class="form-control datetimepicker-input" data-target="#eventDate"/>
+                    <div class="input-group-append" data-target="#eventDate" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+            	</div>
+				<p th:if="${#fields.hasErrors('eventDate')}" th:errors="*{eventDate}" class="label label-danger"></p>
+				  
+		         <!--  <input class="form-control mr-sm-2" th:field="*{entryDate}" type="text">
+		          <p th:if="${#fields.hasErrors('entryDate')}" th:errors="*{entryDate}" class="label label-danger"></p>  -->
+		        
+		    </div> 
+		    
+		    <label>Ergebnisse</label>		    
+		    
+	
+		    <div class="row" th:each="row,rowStat : *{eventResultsSort}">
+		    	<input th:field="*{eventResults[__${rowStat.index}__].id}" type="hidden">
+	
+		    	  <input th:field="*{eventResults[__${rowStat.index}__].event.id}" type="hidden">
+		    	  
+		    	  <input th:field="*{eventResults[__${rowStat.index}__].player.id}" type="hidden">
+			     <div class="col">
+			     	<p th:text="${row.player.firstName}" />			     	
+			    </div>
+		    	 <div class="col">
+		    	 		  
+		          	<input class="form-control mr-sm-2" th:field="*{eventResults[__${rowStat.index}__].points}" type="number" placeholder="Punkte">
+		        </div>
+		        
+		        <div class="col">  		         		          
+		          <p th:text="${row.amount} + ' EUR'"></p> 
+		        </div>
+		        
+		        <div class="col">  		         		          
+		          <input class="form-control mr-sm-2" th:field="*{eventResults[__${rowStat.index}__].donation}" type="text" placeholder="Spende">
+		        </div>  
+		    </div>
+		    
+
+		<script type="text/javascript">
+            $(function () {
+                $('#eventDate').datetimepicker({
+                	locale: 'de'
+                });
+            });
+        </script>
+        
+       </div>
+       
+</body>
+	
+</html>
+

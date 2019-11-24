@@ -1,0 +1,92 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+
+    <body>
+    
+
+  
+        <section layout:fragment="custom-content">
+        
+        <script>
+        
+        $("#rankingForm").validate();
+        
+  $( function() {    
+ 	   
+	    
+    $( "#mdisplay" ).autocomplete({
+      source: function( request, response ) {
+          $.ajax( {
+              url: "/membersautocomplete",
+              dataType: "json",
+              data: {
+                term: request.term
+              },
+              success: function( data ) {            	
+                response( data );
+              }
+          });                       
+      },
+      minLength: 2,
+      focus: function (event, ui) {
+          $("#mdisplay").val(ui.item.firstname + " " + ui.item.lastname);
+          $("#mid").val(ui.item.id);
+ 
+          return false;
+      },
+      select: function (event, ui) {
+          $("#mdisplay").val(ui.item.firstname + " " + ui.item.lastname);
+          $("#mid").val(ui.item.id);
+ 
+          return false;
+      },
+    } ).data("ui-autocomplete")._renderItem = function (ul, item) {        
+        $("#mid").val(item.id);
+        return $("<li>")
+        .append(item.firstname + " " + item.lastname)
+        .appendTo(ul);
+    };
+
+  } );
+  </script>
+  
+        
+		<h3 th:text="'Ranglisten Position ' + ${{ranking.ranking}}"></h3>
+		
+		<form id="rankingForm" th:action="@{/ranking}" method="post" th:object="${ranking}">	
+		
+			<input th:type="hidden" name="id" th:field="*{id}" />
+       
+			<div class="form-group">
+				  <label for="member">Spieler</label>
+				  
+				  <!-- 
+		          <select th:field="*{member}" size="1">
+		          	<option th:each="m : ${members}"
+						th:value="${{m.id}}"
+						th:text="${m.display}">
+				</option>
+		          </select>		
+				 -->		
+				 
+					<input class="form-control mr-sm-2" id="mdisplay" name="mdisplay" th:value="${member.display}"  type="text" required>	
+					<input class="form-control mr-sm-2" id="mid" name="mid" th:value="${member.id}"  type="hidden">
+	
+				
+						          
+		    </div>           		    
+			
+			<button class="btn btn-primary" type="submit">Speichern</button>
+
+		</form>
+		
+		<br/>      
+
+      
+  
+</section>
+ </body>
+
+	
+</html>
+

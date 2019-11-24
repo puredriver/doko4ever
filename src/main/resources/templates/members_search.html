@@ -1,0 +1,55 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout.html}">
+    
+    <body>
+        <section layout:fragment="custom-content">
+        
+<h3>Mitglieder suchen</h3>
+
+ 
+<form  action="#" th:action="@{/members_search}" method="post" th:object=${search} class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" id="search" th:field="*{searchString}" type="text" placeholder="Suche" aria-label="Suche">
+          <input type="submit" class="btn btn-primary">          
+</form>
+
+
+<br/>      
+      
+       
+<table class="table table-striped">
+                <thead>
+                    <tr>                       
+                    	<th scope="col"></th>
+                        <th scope="col">Vorname                        	
+                        </th>
+                        	
+                        	               
+                        <th scope="col">Nachname</th>
+                        <th scope="col">Eintrittsdatum</th>                                               
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="m : ${members}">
+                    
+                        <td>
+                        	<a th:href="@{/member/__${m.id}__}">Edit</a>                        	
+                        </td>                        
+                        <td th:text="${{m.firstname}}"></td>            
+                        <td th:text="${{m.lastname}}"></td>
+                        <td th:text="${{m.entryDate}}"></td>
+                       
+                    </tr>           
+                </tbody>
+            </table>
+            
+            
+     
+        
+           
+
+            </section>
+ </body>
+
+	
+	</html>
+

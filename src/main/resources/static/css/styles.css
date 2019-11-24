@@ -1,0 +1,25 @@
+@charset "ISO-8859-1";
+
+
+main > .container {
+  padding: 60px 15px 0;
+}
+
+#actionpanel {
+  position: fixed; /* Set the navbar to fixed position */
+  bottom: 0; /* Position the navbar at the bottom of the page */
+  width: 100%; /* Full width */
+}
+
+.footer {
+  background-color: #f5f5f5;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}

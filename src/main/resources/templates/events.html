@@ -1,0 +1,56 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout.html}">
+    
+    <body>
+        <section layout:fragment="custom-content">
+  
+  
+  <div class="container">
+  
+	  <div class="row">
+	    <div class="col-5">
+			<h4>Dokotermine</h4>
+	    </div>
+	       	    
+	  </div>
+	 
+	  <div class="row">
+		<table class="table table-striped">
+                <thead>
+                    <tr>                       
+                    	<th scope="col"></th>
+                        <th scope="col">Ort</th>                        	              
+                        <th scope="col">Datum</th>                                                                      
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="m : ${events}">                    
+                        <td>
+                        	<a th:href="@{/event/__${m.id}__}">Edit</a>                        	                                                
+                        	<a th:href="@{/delevent/__${m.id}__}">Del</a>                        	                        
+                        </td>                        
+                        <td th:text="${{m.location}}"></td>            
+                        <td th:text="${{m.eventDate}}"></td>                                               
+                    </tr>           
+                </tbody>
+            </table>	  
+	  </div>
+	  
+	  <div class="row">
+	    <div class="navbar" id="actionpanel">
+	  	<div class="btn-group" role="group" aria-label="">
+		  <a class="btn btn-primary" th:href="@{/event}" role="button">Neu</a>
+		</div>
+		</div>
+	  
+	  </div>
+	</div>
+
+       
+            
+           
+ </body>
+
+	
+	</html>
+
