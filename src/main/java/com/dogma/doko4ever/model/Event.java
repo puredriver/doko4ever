@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -38,6 +40,14 @@ public class Event {
 	@OneToMany(mappedBy = "event", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<EventResult> eventResults = new ArrayList<EventResult>();
 
+	@ManyToOne
+	@JoinColumn(name = "fk_host_id")
+	private Player host;
+
+	@ManyToOne
+	@JoinColumn(name = "fk_writer_id")
+	private Player writer;
+
 	public void initEventResults(Iterable<Player> players) {
 		for (Player player : players) {
 			eventResults.add(new EventResult(this, player));
@@ -54,6 +64,10 @@ public class Event {
 
 	public void calcAmount(int centPerPoint, long maxAmount) {
 		Comparator<EventResult> eventResultsPointsComparator = Comparator.comparingInt(EventResult::getPoints);
+
+		if (this.eventResults == null || this.eventResults.isEmpty())
+			return;
+
 		EventResult r = Collections.max(this.eventResults, eventResultsPointsComparator);
 
 		for (EventResult eventResult : eventResults) {
@@ -107,6 +121,22 @@ public class Event {
 
 	public List<EventResult> getEventResults() {
 		return eventResults;
+	}
+
+	public Player getHost() {
+		return host;
+	}
+
+	public void setHost(Player host) {
+		this.host = host;
+	}
+
+	public Player getWriter() {
+		return writer;
+	}
+
+	public void setWriter(Player writer) {
+		this.writer = writer;
 	}
 
 }

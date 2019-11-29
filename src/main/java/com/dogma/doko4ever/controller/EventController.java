@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.dogma.doko4ever.model.Event;
+import com.dogma.doko4ever.model.Player;
 import com.dogma.doko4ever.repository.EventRepository;
 import com.dogma.doko4ever.repository.PlayerRepository;
 
@@ -29,6 +30,11 @@ public class EventController {
 
 	@Autowired
 	private PlayerRepository playerrep;
+
+	@ModelAttribute("players")
+	public Iterable<Player> getPlayers() {
+		return playerrep.findAll();
+	}
 
 	@GetMapping("/events")
 	public String getEvents(Model model) {

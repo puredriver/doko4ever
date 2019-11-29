@@ -1,7 +1,5 @@
 package com.dogma.doko4ever.repository;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +27,14 @@ class PlayerRepositoryTest {
 
 	}
 
-	@Test
-	void testFindById() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testFindAll() {
-		fail("Not yet implemented");
-	}
+	//	@Test
+	//	void testFindById() {
+	//		fail("Not yet implemented");
+	//	}
+	//
+	//	@Test
+	//	void testFindAll() {
+	//		fail("Not yet implemented");
+	//	}
 
 }
