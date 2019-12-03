@@ -8,8 +8,10 @@ import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
 
-import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -86,44 +88,51 @@ public class AppConfig {
 		return properties;
 	}
 
-	@Bean(name = "dataSource")
-	public BasicDataSource dataSource() {
-		BasicDataSource rtn = new BasicDataSource();
-		rtn.setDriverClassName(env.getProperty("db.driverClassName"));
-		rtn.setUrl(env.getProperty("db.url"));
-		rtn.setUsername(env.getProperty("db.username"));
-		rtn.setPassword(env.getProperty("db.password"));
-		return rtn;
-
-		//		StringBuffer url = new StringBuffer();
-		//		url.append("jdbc:postgresql://");
-
-		// amazon aws
-		// String dbName = System.getProperty("RDS_DB_NAME");
-		// String userName = System.getProperty("RDS_USERNAME");
-		// String password = System.getProperty("RDS_PASSWORD");
-		// String hostname = System.getProperty("RDS_HOSTNAME");
-		// String port = System.getProperty("RDS_PORT");
-		// localhost
-		// extract to propties files
-		//		String dbName = "myclub_dev";
-		//		String userName = "postgres";
-		//		String password = "postgres";
-		//		String hostname = "localhost";
-		//		String port = "5432";
-		//
-		//		url.append(hostname);
-		//		url.append(":");
-		//		url.append(port);
-		//		url.append("/");
-		//		url.append(dbName);
-
-		//
-		// localhost
-		// rtn.setUsername("root");
-		// rtn.setPassword("");
+	@Bean
+	@ConfigurationProperties(prefix = "spring.datasource")
+	public DataSource dataSource() {
+		return (DataSource) DataSourceBuilder.create().build();
 
 	}
+
+	//	@Bean(name = "dataSource")
+	//	public BasicDataSource dataSource() {
+	//		BasicDataSource rtn = new BasicDataSource();
+	//		rtn.setDriverClassName(env.getProperty("db.driverClassName"));
+	//		rtn.setUrl(env.getProperty("db.url"));
+	//		rtn.setUsername(env.getProperty("db.username"));
+	//		rtn.setPassword(env.getProperty("db.password"));
+	//		return rtn;
+
+	//		StringBuffer url = new StringBuffer();
+	//		url.append("jdbc:postgresql://");
+
+	// amazon aws
+	// String dbName = System.getProperty("RDS_DB_NAME");
+	// String userName = System.getProperty("RDS_USERNAME");
+	// String password = System.getProperty("RDS_PASSWORD");
+	// String hostname = System.getProperty("RDS_HOSTNAME");
+	// String port = System.getProperty("RDS_PORT");
+	// localhost
+	// extract to propties files
+	//		String dbName = "myclub_dev";
+	//		String userName = "postgres";
+	//		String password = "postgres";
+	//		String hostname = "localhost";
+	//		String port = "5432";
+	//
+	//		url.append(hostname);
+	//		url.append(":");
+	//		url.append(port);
+	//		url.append("/");
+	//		url.append(dbName);
+
+	//
+	// localhost
+	// rtn.setUsername("root");
+	// rtn.setPassword("");
+
+	//}
 
 	@Bean
 	public PlatformTransactionManager transactionManager() {

@@ -7,14 +7,15 @@
   </parent>
   <groupId>com.dogma</groupId>
   <artifactId>doko4ever</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>doko4ever</name>
+  <packaging>jar</packaging>
   
   <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<start-class>com.dogma.myclub.MyClubApplication</start-class>
+		<start-class>com.dogma.doko4ever.Doko4everApplication</start-class>
 	</properties>
 
 	<dependencies>
@@ -55,6 +56,15 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 		</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc -->
+<dependency>
+    <groupId>org.apache.tomcat</groupId>
+    <artifactId>tomcat-jdbc</artifactId>
+    <version>9.0.29</version>
+</dependency>
+	
+	
 		<!-- 
 		<dependency>
 		    <groupId>org.apache.wicket</groupId>
@@ -91,11 +101,38 @@
                <artifactId>postgresql</artifactId>
                <version>42.2.8</version>
         </dependency>
-        
+
        
    
 	</dependencies>
 
+<!-- 	
+	<profiles>
+	    <profile>
+	        <id>dev</id>
+	        <activation>
+	            <activeByDefault>true</activeByDefault>
+	        </activation>
+	        <properties>
+	            <spring.profiles.active>dev</spring.profiles.active>	           
+	        </properties>
+	    </profile>
+	    <profile>
+	        <id>prod</id>
+	        <properties>
+	            <spring.profiles.active>prod</spring.profiles.active>
+	        </properties>
+	    </profile>
+	</profiles>
+
+
+		<resources>
+	        <resource>
+	            <directory>src/main/resources</directory>
+	            <filtering>true</filtering>
+	        </resource>
+	    </resources>
+	     -->
 	<build>
 		<plugins>
 			<plugin>
