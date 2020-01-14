@@ -4,12 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.ColumnTransformer;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@Table(name = "players")
 public class Player {
 
 	@Id
@@ -19,22 +20,27 @@ public class Player {
 
 	@Column
 	@NotNull
-	private String firstName;
+	private String firstname;
 
 	@Column
 	@NotNull
-	private String lastName;
+	private String lastname;
 
 	@Column
 	@NotNull
 	private String email;
 
-	@Column(columnDefinition = "bytea")
+	@Column
 	@NotNull
-	@ColumnTransformer(read = "pgp_sym_decrypt(password, 'mySecretKey')", write = "pgp_sym_encrypt(?, 'mySecretKey')")
-	// encrypt.key should be moved to postgresql.conf - https://vladmihalcea.com/how-to-encrypt-and-decrypt-data-with-hibernate/
-	private String password;
+	private int active;
 
+	// @Column(columnDefinition = "bytea")
+	// @NotNull
+	// @ColumnTransformer(read = "pgp_sym_decrypt(password, 'mySecretKey')", write =
+	// "pgp_sym_encrypt(?, 'mySecretKey')")
+	// encrypt.key should be moved to postgresql.conf -
+	// https://vladmihalcea.com/how-to-encrypt-and-decrypt-data-with-hibernate/
+	// private String password;
 	public Long getId() {
 		return id;
 	}
@@ -43,20 +49,20 @@ public class Player {
 		this.id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getLastname() {
+		return lastname;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getEmail() {
@@ -65,14 +71,6 @@ public class Player {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 }

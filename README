@@ -5,4 +5,10 @@ HIBERNATE
 THYMELEAF
 
 Postgres
+schema changes
+- drop columns events.amount_per_score / events.amount_max 
+- drop columns event_results.rank
+- set player "Asja" active=0 
+
 install extension pgcrypt für password encryption
+move keyphase to postgresql.conf

@@ -1,0 +1,51 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout.html}">
+    
+    <body>
+        <section layout:fragment="custom-content">
+  
+  
+  <div class="container">
+  
+	  <div class="row">
+	    <div class="col-5">
+			<h4>Kasse</h4>
+	    </div>
+	       	    
+	  </div>
+	  
+	  <div class="row">
+	    <div class="col-5">
+			<h5 th:text="'Aktueller Stand: ' + ${amount} + ' EUR'"></h5>
+	    </div>	       	    
+	  </div>
+	 
+	  <div class="row">
+		<table class="table table-striped">
+                <thead>
+                    <tr>                                           	
+                        <th scope="col">Datum</th>                        	              
+                        <th scope="col">Betrag</th>
+                        <th scope="col">Kommentar</th>                                                                      
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="m : ${cashbox}">                                                                   
+                        <td th:text="${{m.inventoryDate}}"></td>            
+                        <td th:text="${{m.amount}} + ' EUR'"></td>                                               
+                        <td th:text="${{m.comment}}"></td>
+                    </tr>           
+                </tbody>
+            </table>	  
+	  </div>	  	 
+	  
+	</div>
+
+       
+            
+           
+ </body>
+
+	
+	</html>
+

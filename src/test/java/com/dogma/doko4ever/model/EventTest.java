@@ -14,20 +14,20 @@ public class EventTest {
 	@Test
 	public void testInitEventResults() {
 		Player one = new Player();
-		one.setFirstName("andre");
+		one.setFirstname("andre");
 
 		Player two = new Player();
-		two.setFirstName("isabell");
+		two.setFirstname("isabell");
 
 		Player three = new Player();
-		three.setFirstName("henri");
+		three.setFirstname("henri");
 
 		Event e = new Event();
 		e.initEventResults(Arrays.asList(one, two, three));
 
-		assertEquals("andre", e.getEventResults().get(0).getPlayer().getFirstName());
-		assertEquals("isabell", e.getEventResults().get(1).getPlayer().getFirstName());
-		assertEquals("henri", e.getEventResults().get(2).getPlayer().getFirstName());
+		assertEquals("andre", e.getEventResults().get(0).getPlayer().getFirstname());
+		assertEquals("isabell", e.getEventResults().get(1).getPlayer().getFirstname());
+		assertEquals("henri", e.getEventResults().get(2).getPlayer().getFirstname());
 	}
 
 	@Test

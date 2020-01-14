@@ -6,29 +6,34 @@
   
    <section layout:fragment="custom-content">
 
-	     <div class="row">
-	    <div class="col-5">
-			<h4>N&auml;chste Dokotermine</h4>
-	    </div>
-	       	    
-	  </div>
-	 
-	  <div class="row">
-		<table class="table table-striped">
-                <thead>
-                    <tr>                                           	
-                        <th scope="col">Ort</th>                        	              
-                        <th scope="col">Datum</th>                                                                      
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="m : ${events}">                                                     
-                        <td th:text="${{m.location}}"></td>            
-                        <td th:text="${{m.eventDate}}"></td>                                               
-                    </tr>           
-                </tbody>
-            </table>	  
-	  </div>
+	      <style type="text/css">
+       
+</style>
+
+
+<span  th:each="p : ${pyramids}">
+
+<h3 th:text="${p.name}" class="text-primary"></h3>
+
+
+ <div align="center">
+  <div align="center" th:each="r : ${p.rows}">
+  	  	
+  	<a th:href="@{/matchchallenge/__${p.rankinglist.id}__/__${e.mId}__}" th:each="e : ${r.entries}" th:text="${e.memberDisp}"></a> 
+  
+  </div>
+  
+</div> 
+
+<h5>Nächste Matches</h5>
+<div align="center" th:each="match : ${p.rankinglist.matches}">
+<p th:text="${match.display}"> </p>
+</div>
+
+            
+
+<br/>
+</span>
 
     </section>
   

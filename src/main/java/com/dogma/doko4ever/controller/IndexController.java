@@ -1,7 +1,5 @@
 package com.dogma.doko4ever.controller;
 
-import java.time.LocalDateTime;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +20,8 @@ public class IndexController {
 	@GetMapping("/")
 	public String getIndex(Model model) {
 
-		model.addAttribute("events", rep.findByEventDateGreaterThanOrderByEventDateAsc(LocalDateTime.now()));
+		// model.addAttribute("events",
+		// rep.findByEventDateGreaterThanOrderByEventDateAsc(LocalDateTime.now()));
 
 		return "index";
 

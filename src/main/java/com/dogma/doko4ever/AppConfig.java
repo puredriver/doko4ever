@@ -4,108 +4,82 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.Properties;
 
-import javax.persistence.EntityManagerFactory;
-
-import org.apache.tomcat.jdbc.pool.DataSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.expression.ParseException;
 import org.springframework.format.Formatter;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.ViewResolver;
-import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @Configuration
-@EnableTransactionManagement
-@EnableJpaRepositories("com.dogma.doko4ever.repository")
+// @EnableTransactionManagement
 //@EnableScheduling
 public class AppConfig {
 
-	@Autowired
-	private Environment env;
+	// private Environment env;
 
-	@Bean
-	public EntityManagerFactory entityManagerFactory() {
+//	@Bean
+//	public EntityManagerFactory entityManagerFactory() {
+//
+//		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+//		// vendorAdapter.setGenerateDdl(true);
+//		// vendorAdapter.setShowSql(true);
+//		// vendorAdapter.setDatabase(Database.POSTGRESQL);
+//
+//		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+//		factory.setJpaVendorAdapter(vendorAdapter);
+//		factory.setPackagesToScan("com.dogma.doko4ever.model");
+//		factory.setDataSource(dataSource());
+//		// factory.setJpaDialect(PostgreSQL9Dialect.getDialect());
+//		factory.setJpaProperties(hibernateProperties());
+//		factory.afterPropertiesSet();
+//
+//		return factory.getObject();
+//	}
 
-		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		// vendorAdapter.setGenerateDdl(true);
-		// vendorAdapter.setShowSql(true);
-		// vendorAdapter.setDatabase(Database.POSTGRESQL);
+//	@Bean
+//	public ViewResolver viewResolver() {
+//		SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+//		// templateResolver.setTemplateMode("XHTML");
+//		templateResolver.setPrefix("templates/");
+//		templateResolver.setSuffix(".html");
+//		templateResolver.setCharacterEncoding("UTF-8");
+//
+//		SpringTemplateEngine engine = new SpringTemplateEngine();
+//		engine.setTemplateResolver(templateResolver);
+//
+//		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+//		viewResolver.setTemplateEngine(engine);
+//		viewResolver.setContentType("text/html; charset=UTF-8");
+//		viewResolver.setCharacterEncoding("UTF-8");
+//		return viewResolver;
+//	}
+//
+//	@Bean
+//	public Properties hibernateProperties() {
+//		Properties properties = new Properties();
+//		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL95Dialect");
+//		properties.put("hibernate.show_sql", "true");
+//		properties.put("hibernate.hbm2ddl.auto", "update");
+//		properties.put("hibernate.jdbc.lob.non_contextual_creation", "true");
+//		// properties.put("hibernate.search.default.directory_provider", "filesystem");
+//		// index pfad in properties
+//		// properties.put("hibernate.search.default.indexBase",
+//		// "C:\\Users\\Andre.Jacobi\\Desktop\\tmp\\backofficeindex");
+//
+//		return properties;
+//	}
 
-		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-		factory.setJpaVendorAdapter(vendorAdapter);
-		factory.setPackagesToScan("com.dogma.doko4ever.model");
-		factory.setDataSource(dataSource());
-		// factory.setJpaDialect(PostgreSQL9Dialect.getDialect());
-		factory.setJpaProperties(hibernateProperties());
-		factory.afterPropertiesSet();
+//	@Bean(name = "dataSource")
+//	public BasicDataSource dataSource() {
+//		BasicDataSource rtn = new BasicDataSource();
+//		rtn.setDriverClassName(env.getProperty("db.driverClassName"));
+//		rtn.setUrl(env.getProperty("db.url"));
+//		rtn.setUsername(env.getProperty("db.username"));
+//		rtn.setPassword(env.getProperty("db.password"));
+//		return rtn;
 
-		return factory.getObject();
-	}
-
-	@Bean
-	public ViewResolver viewResolver() {
-		SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-		//templateResolver.setTemplateMode("XHTML");
-		templateResolver.setPrefix("templates/");
-		templateResolver.setSuffix(".html");
-		templateResolver.setCharacterEncoding("UTF-8");
-
-		SpringTemplateEngine engine = new SpringTemplateEngine();
-		engine.setTemplateResolver(templateResolver);
-
-		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-		viewResolver.setTemplateEngine(engine);
-		viewResolver.setContentType("text/html; charset=UTF-8");
-		viewResolver.setCharacterEncoding("UTF-8");
-		return viewResolver;
-	}
-
-	@Bean
-	public Properties hibernateProperties() {
-		Properties properties = new Properties();
-		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL95Dialect");
-		properties.put("hibernate.show_sql", "true");
-		properties.put("hibernate.hbm2ddl.auto", "update");
-		properties.put("hibernate.jdbc.lob.non_contextual_creation", "true");
-		// properties.put("hibernate.search.default.directory_provider", "filesystem");
-		// TODO index pfad in properties
-		// properties.put("hibernate.search.default.indexBase", "C:\\Users\\Andre.Jacobi\\Desktop\\tmp\\backofficeindex");
-
-		return properties;
-	}
-
-	@Bean
-	@ConfigurationProperties(prefix = "spring.datasource")
-	public DataSource dataSource() {
-		return (DataSource) DataSourceBuilder.create().build();
-
-	}
-
-	//	@Bean(name = "dataSource")
-	//	public BasicDataSource dataSource() {
-	//		BasicDataSource rtn = new BasicDataSource();
-	//		rtn.setDriverClassName(env.getProperty("db.driverClassName"));
-	//		rtn.setUrl(env.getProperty("db.url"));
-	//		rtn.setUsername(env.getProperty("db.username"));
-	//		rtn.setPassword(env.getProperty("db.password"));
-	//		return rtn;
-
-	//		StringBuffer url = new StringBuffer();
-	//		url.append("jdbc:postgresql://");
+	// StringBuffer url = new StringBuffer();
+	// url.append("jdbc:postgresql://");
 
 	// amazon aws
 	// String dbName = System.getProperty("RDS_DB_NAME");
@@ -115,32 +89,32 @@ public class AppConfig {
 	// String port = System.getProperty("RDS_PORT");
 	// localhost
 	// extract to propties files
-	//		String dbName = "myclub_dev";
-	//		String userName = "postgres";
-	//		String password = "postgres";
-	//		String hostname = "localhost";
-	//		String port = "5432";
+	// String dbName = "myclub_dev";
+	// String userName = "postgres";
+	// String password = "postgres";
+	// String hostname = "localhost";
+	// String port = "5432";
 	//
-	//		url.append(hostname);
-	//		url.append(":");
-	//		url.append(port);
-	//		url.append("/");
-	//		url.append(dbName);
+	// url.append(hostname);
+	// url.append(":");
+	// url.append(port);
+	// url.append("/");
+	// url.append(dbName);
 
 	//
 	// localhost
 	// rtn.setUsername("root");
 	// rtn.setPassword("");
 
-	//}
+//	}
 
-	@Bean
-	public PlatformTransactionManager transactionManager() {
-
-		JpaTransactionManager txManager = new JpaTransactionManager();
-		txManager.setEntityManagerFactory(entityManagerFactory());
-		return txManager;
-	}
+//	@Bean
+//	public PlatformTransactionManager transactionManager() {
+//
+//		JpaTransactionManager txManager = new JpaTransactionManager();
+//		txManager.setEntityManagerFactory(entityManagerFactory());
+//		return txManager;
+//	}
 
 	@Bean
 	public Formatter<LocalDate> localDateFormatter() {
@@ -178,11 +152,10 @@ public class AppConfig {
 	}
 
 	/*
-	@Bean
-	public LogRequestFilter requestLoggingFilter() {
-	
-		return new LogRequestFilter();
-	}*/
+	 * @Bean public LogRequestFilter requestLoggingFilter() {
+	 * 
+	 * return new LogRequestFilter(); }
+	 */
 
 	/**
 	 * Enables the Pageable request param in the controller class

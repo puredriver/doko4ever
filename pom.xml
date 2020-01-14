@@ -3,18 +3,17 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.2.1.RELEASE</version>
+    <version>2.2.2.RELEASE</version>
   </parent>
   <groupId>com.dogma</groupId>
   <artifactId>doko4ever</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.1-SNAPSHOT</version>
   <name>doko4ever</name>
-  <packaging>jar</packaging>
   
   <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 		<start-class>com.dogma.doko4ever.Doko4everApplication</start-class>
 	</properties>
 
@@ -36,9 +35,14 @@
 		
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<!-- 
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-security</artifactId>		
 		</dependency>
-		
+		 -->
 		
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -52,19 +56,12 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!--  
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 		</dependency>
-	
-	<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc -->
-<dependency>
-    <groupId>org.apache.tomcat</groupId>
-    <artifactId>tomcat-jdbc</artifactId>
-    <version>9.0.29</version>
-</dependency>
-	
-	
+		-->
 		<!-- 
 		<dependency>
 		    <groupId>org.apache.wicket</groupId>
@@ -88,51 +85,32 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.4.8.Final</version>
+			<!-- <version>5.4.8.Final</version>  -->
 		</dependency>
-		
+		 <!--
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-c3p0</artifactId>
+		     <version>5.3.6.Final</version> 
+		</dependency>
+		-->
+		<!-- 
 		<dependency>
            <groupId>commons-dbcp</groupId>
                <artifactId>commons-dbcp</artifactId>
                <version>1.4</version>
         </dependency>
+         -->
         <dependency>
                <groupId>org.postgresql</groupId>
                <artifactId>postgresql</artifactId>
-               <version>42.2.8</version>
+              <!--  <version>42.2.8</version>  -->
         </dependency>
-
+        
        
    
 	</dependencies>
 
-<!-- 	
-	<profiles>
-	    <profile>
-	        <id>dev</id>
-	        <activation>
-	            <activeByDefault>true</activeByDefault>
-	        </activation>
-	        <properties>
-	            <spring.profiles.active>dev</spring.profiles.active>	           
-	        </properties>
-	    </profile>
-	    <profile>
-	        <id>prod</id>
-	        <properties>
-	            <spring.profiles.active>prod</spring.profiles.active>
-	        </properties>
-	    </profile>
-	</profiles>
-
-
-		<resources>
-	        <resource>
-	            <directory>src/main/resources</directory>
-	            <filtering>true</filtering>
-	        </resource>
-	    </resources>
-	     -->
 	<build>
 		<plugins>
 			<plugin>

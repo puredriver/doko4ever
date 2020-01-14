@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.dogma.doko4ever.model.Event;
-import com.dogma.doko4ever.model.Player;
 import com.dogma.doko4ever.repository.EventRepository;
 import com.dogma.doko4ever.repository.PlayerRepository;
 
@@ -31,15 +30,10 @@ public class EventController {
 	@Autowired
 	private PlayerRepository playerrep;
 
-	@ModelAttribute("players")
-	public Iterable<Player> getPlayers() {
-		return playerrep.findAll();
-	}
-
 	@GetMapping("/events")
 	public String getEvents(Model model) {
 
-		model.addAttribute("events", rep.findByOrderByEventDateAsc());
+		model.addAttribute("events", rep.findByOrderByEventDateDesc());
 
 		return "events";
 
@@ -70,13 +64,16 @@ public class EventController {
 
 		if (event.getId() == null) {
 			// safe first - error transient instance must be saved before current operation
+			// TODO save transation required if an eventresult breaks
 			rep.save(event);
-			event.initEventResults(playerrep.findAll());
+			event.initEventResults(playerrep.findByActive(1));
 		}
 
+		// TODO export to application.properties
 		event.calcAmount(10, 10);
 		rep.save(event);
 
+		// TODO messages
 		return "redirect:event/" + event.getId();
 
 	}

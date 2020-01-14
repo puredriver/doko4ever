@@ -9,11 +9,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@Table(name = "event_results")
 public class EventResult {
 
 	@Id
@@ -40,12 +42,13 @@ public class EventResult {
 	private Player player;
 
 	public EventResult() {
-
+		donation = BigDecimal.ZERO;
 	}
 
 	public EventResult(Event event, Player player) {
 		this.event = event;
 		this.player = player;
+		donation = BigDecimal.ZERO;
 	}
 
 	public EventResult(Event event, int points) {
